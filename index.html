@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Synchrony Wing | Museum of Temporary Forms</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #FDFBF7; /* Warm Cream/Parchment */
+            --text-color: #2F2F2F; /* Deep Charcoal */
+            --accent-color: #8C7B6E; /* Muted Earth Tone */
+            --transition: all 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        /* --- Header Section --- */
+        header {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 120px 20px 80px 20px;
+            text-align: center;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 400;
+            font-size: 2.5rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+        }
+
+        .why-this-space {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 1.2rem;
+            color: var(--accent-color);
+            max-width: 600px;
+            margin: 0 auto;
+            border-top: 1px solid #E0DED9;
+            border-bottom: 1px solid #E0DED9;
+            padding: 40px 0;
+        }
+
+        /* FIXED: Added missing Sub-header styling */
+        .sub-header-caption {
+            max-width: 600px;
+            margin: 30px auto 0 auto;
+            font-size: 0.8rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: var(--accent-color);
+            opacity: 0.8;
+            line-height: 1.8;
+        }
+
+        /* --- Grid Item Wrapper --- */
+        .grid-item-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center; 
+        }
+
+        .grid-item-caption {
+            margin-top: 15px;
+            font-size: 0.7rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--accent-color);
+            text-align: center;
+            font-weight: 300;
+            opacity: 0.7; 
+        }
+
+        /* --- Exhibit Grid --- */
+        .gallery-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px 100px 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 60px 40px; /* Increased row gap for captions */
+        }
+
+        .exhibit-card {
+            position: relative;
+            background: white;
+            aspect-ratio: 1 / 1;
+            overflow: hidden;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .exhibit-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+            opacity: 1;
+        }
+
+        .exhibit-description {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+            box-sizing: border-box;
+            text-align: center;
+            opacity: 0;
+            transition: var(--transition);
+            background-color: var(--bg-color);
+        }
+
+        .exhibit-description h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+        }
+
+        .exhibit-description p {
+            font-size: 0.9rem;
+            color: var(--accent-color);
+        }
+
+        /* --- Hover States --- */
+        .exhibit-card:hover .exhibit-image {
+            opacity: 0.1;
+            transform: scale(1.05);
+        }
+
+        .exhibit-card:hover .exhibit-description {
+            opacity: 1;
+        }
+
+        /* --- Bottom Frame Section --- */
+        .bottom-frame-container {
+            max-width: 1200px;
+            margin: 40px auto 100px auto;
+            padding: 0 20px;
+        }
+
+        .bottom-frame-caption {
+            border: 1px solid #E0DED9;
+            padding: 60px 40px;
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 1.1rem;
+            color: var(--text-color);
+            position: relative;
+        }
+
+        .bottom-frame-caption::before {
+            content: "";
+            position: absolute;
+            top: 10px; left: 10px; right: 10px; bottom: 10px;
+            border: 1px solid rgba(140, 123, 110, 0.1);
+            pointer-events: none;
+        }
+
+        /* --- Footer --- */
+        footer {
+            border-top: 1px solid #E0DED9;
+            padding: 60px 20px;
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            display: flex;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            color: var(--accent-color);
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 1.8rem; }
+            footer { flex-direction: column; align-items: center; gap: 10px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>The Synchrony Wing</h1>
+        <div class="why-this-space">
+            Nature rarely holds a pose. The "Intersections"— brief, geometric coincidences where growth meets light or where two separate lives align for a single breath. We often look at nature as a series of objects, but rarely as a series of meetings. This space is dedicated to the 'Intersection'— the precise second where growth, light, and perspective align to create a geometry that will never exist in exactly this way again. We gather these moments not as objects, but as evidence of a quiet, temporary architecture.
+"Built to witness the ordinary at the exact threshold of the unrepeatable."
+        </div>
+        <div class="sub-header-caption">
+           "An effort Dedicated to the intersection of time and chance: looking beyond the ordinary to find the moment that happens only once." It is a gallery of the temporary.
+        </div>
+    </header>
+
+    <main class="gallery-container">
+        
+        <div class="grid-item-container"> 
+        <div class="exhibit-card">
+            <img src="image1.jpg" alt="Tridax and Grass" class="exhibit-image">
+            <div class="exhibit-description">
+                <h3>The Vein of Divergence</h3>
+                <p>A "bifid" leaf is a beautiful architectural glitch. Instead of the standard hierarchical branching, this leaf has a dual primary system. It’s as if the plant’s "blueprint" couldn't decide on a single direction and chose to pursue two destinies at once, sharing a single heart.</p>
+            </div>
+        </div>
+        <div class="grid-item-caption">
+            Archive No. 01
+        </div>
+    </div>
+
+    <div class="grid-item-container">
+        <div class="exhibit-card">
+            <img src="image2.jpg" alt="Guava Shoot" class="exhibit-image">
+            <div class="exhibit-description">
+                <h3>The Intersection</h3>
+                <p>A spatial coincidence. The Tridax procumbens (often called Coat Buttons) standing right against a feathery grass stalk.For a few seconds before the wind moves them, they look like a single, complex organism—a yellow-crowned scepter.</p>
+            </div>
+        </div>
+        <div class="grid-item-caption">
+            Archive No. 02
+        </div>
+    </div>
+
+
+<div class="grid-item-container">
+        <div class="exhibit-card">
+            <img src="image3.jpg" alt="Guava Shoot" class="exhibit-image">
+            <div class="exhibit-description">
+                <h3>The Weaver’s Signature</h3>
+                <p>The "X" formed by its legs perfectly mirrors the silk "signature" it has woven into the center. A moment of perfect stillness at the heart of a complex, vibrating machine.</p>
+            </div>
+        </div>
+        <div class="grid-item-caption">
+            Archive No. 03
+        </div>
+    </div>
+
+  
+<div class="grid-item-container">
+        <div class="exhibit-card">
+            <img src="image4.jpg" alt="Guava Shoot" class="exhibit-image">
+            <div class="exhibit-description">
+                <h3>The Bursting Heart</h3>
+                <p>The exact second where the Bitter Gourd's protective shell fails so that the life inside can begin.It bursts not out of decay, but out of a need to offer its "jewels" to the world.</p>
+            </div>
+        </div>
+        <div class="grid-item-caption">
+            Archive No. 04
+        </div>
+    </div>      
+
+   
+<div class="grid-item-container">
+        <div class="exhibit-card">
+            <img src="image5.jpg" alt="Guava Shoot" class="exhibit-image">
+            <div class="exhibit-description">
+                <h3>A moment in "Synchrony" - The Axial Cradle</h3>
+                <p>In the botanical world, those axes usually diverge—the leaf reaching for light and the bud reaching for space. To see them locked in the same angular trajectory makes the plant look less like an organism and more like a single, unified vector of intent.</p>
+            </div>
+        </div>
+        <div class="grid-item-caption">
+            Archive No. 05
+        </div>
+    </div>
+
+
+<div class="grid-item-container">
+        <div class="exhibit-card">
+            <img src="image6.jpg" alt="Guava Shoot" class="exhibit-image">
+            <div class="exhibit-description">
+                <h3>The hardened geometry of memory</h3>
+                <p>A Transmuted Resilience.Once a site of loss - where a limb was severed—but the tree did not simply close the gap. It sculpted a "third eye" from the trauma. The rough, calloused eyelids and the deep, dark pupil of the hollow suggest that the tree is now a spectator of its own environment. It proves that time doesn't just heal; it provides a new way to see the world.</p>
+            </div>
+        </div>
+        <div class="grid-item-caption">
+            Archive No. 06 
+        </div>
+    </div>
+
+
+<div class="grid-item-container">
+        <div class="exhibit-card">
+            <img src="image7.jpg" alt="Guava Shoot" class="exhibit-image">
+            <div class="exhibit-description">
+                <h3>A leaf revealing a Solar Circuit</h3>
+                <p>Sunlight acts as a declassifying agent, revealing the hidden "city" inside the leaf. We see the main highway of the midrib, the branching roads of the secondary veins, and the fine, paved "neighborhoods" where energy is actually harvested. It is a portrait of the original solar panel—a design so efficient that human technology is still playing catch-up to its elegance.</p>
+            </div>
+        </div>
+        <div class="grid-item-caption">
+            Archive No. 07 
+        </div>
+    </div>
+
+
+<div class="grid-item-container">
+        <div class="exhibit-card">
+            <img src="image8.jpg" alt="Guava Shoot" class="exhibit-image">
+            <div class="exhibit-description">
+                <h3>The Anchor of Beginnings</h3>
+                <p>A young Tamarind seedling emerging from the soil.A perfect intersection of gravity and grace. The seedling has fought the weight of the earth to emerge, yet it still carries its "old self"—the seed casing—as a badge of where it came from.This intersection captures the moment where the upward will to reach the light is still physically tied to the memory of its origin.</p>
+            </div>
+        </div>
+        <div class="grid-item-caption">
+            Archive No. 08 
+        </div>
+    </div>
+
+
+<div class="grid-item-container">
+        <div class="exhibit-card">
+            <img src="image9.jpg" alt="Guava Shoot" class="exhibit-image">
+            <div class="exhibit-description">
+                <h3>The Radiant Pivot - Foundation of Brilliance</h3>
+                <p>We almost always look at a flower for its display, but this perspective honors the origin.It is a portrait of the "backstage" of beauty.It captures the exact point where the stem transitions from a green, structural support into a vibrant, living color.The intersection of structural integrity and pure pigment—reminding us that the most vibrant expressions in life are only possible because of the quiet, sturdy pivot that holds them in place.</p>
+            </div>
+        </div>
+        <div class="grid-item-caption">
+            Archive No. 09 
+        </div>
+    </div>
+
+
+
+<div class="grid-item-container">
+        <div class="exhibit-card">
+            <img src="image10.jpg" alt="Guava Shoot" class="exhibit-image">
+            <div class="exhibit-description">
+                <h3>The Graceful Detour; Non-Linear Progress</h3>
+                <p>The intersection of ambition and playfulness.While most stems prioritize the shortest distance between the earth and the sun, this one has taken a deliberate detour.It proves that growth doesn't have to be a straight line to be successful-sometimes, the most beautiful way to reach the top is to circle back and find your rhythm first.</p>
+            </div>
+        </div>
+        <div class="grid-item-caption">
+            Archive No. 10 
+        </div>
+    </div>
+
+
+
+<div class="grid-item-container">
+        <div class="exhibit-card">
+            <img src="image11.jpg" alt="Guava Shoot" class="exhibit-image">
+            <div class="exhibit-description">
+                <h3>The Aperture of Intimacy - An Illusion</h3>
+                <p>A macro close-up of overlapping Hibiscus red petals forming a small opening. Capturing that tiny "gap" between the folds of the red petals, created a moment of threshold. It feels like an invitation to a secret. A moment where a flower isn't just a display for the world, but a private, internal space. It’s a masterclass in using depth to change perception.We are no longer looking at the flower; we are looking through it.</p>
+            </div>
+        </div>
+        <div class="grid-item-caption">
+            Archive No. 11 
+        </div>
+    </div>
+
+
+
+<div class="grid-item-container">
+        <div class="exhibit-card">
+            <img src="image12.jpg" alt="Guava Shoot" class="exhibit-image">
+            <div class="exhibit-description">
+                <h3>The Mirroring Pulse</h3>
+                <p>The angle of the lens has collapsed the space between two separate lives, creating a dual-chambered architecture that feels like a single, pulsing weight held in suspense. A moment where the plant’s growth and our perspective meet to reveal a symmetry that will be lost as soon as the petals fully unfurl.</p>
+            </div>
+        </div>
+        <div class="grid-item-caption">
+            Archive No. 12
+        </div>
+    </div>
+
+
+
+<div class="grid-item-container">
+        <div class="exhibit-card">
+            <img src="image13.jpg" alt="Guava Shoot" class="exhibit-image">
+            <div class="exhibit-description">
+                <h3>The intersection of host and guest</h3>
+                <p>The fungus has completely rewritten the "visual language" of the leaf.The Champa leaf has been entirely overtaken by a fungal colony, creating a texture so dense and repetitive that it loses its identity as a leaf.This archive is to look closer and realize that the "perfection" is actually a beautiful form of decay.</p>
+            </div>
+        </div>
+        <div class="grid-item-caption">
+            Archive No. 13 
+        </div>
+    </div>
+
+
+<div class="grid-item-container">
+        <div class="exhibit-card">
+            <img src="image14.jpg" alt="Guava Shoot" class="exhibit-image">
+            <div class="exhibit-description">
+                <h3>The dignity of the fallen</h3>
+                <p>The Grounded Star.It transforms a discarded pomegranate blossom into a geometric anchor.The "Intersection" here is the accidental precision of its landing—where the radial symmetry of the petals meets the linear horizon of the stone.An unrepeatable alignment with the earth, balanced by the dark depth of the water and the reach of its own shadow.The inner architecture — the stamens—looks almost like a tiny, intricate map or an ancient script</p>
+            </div>
+        </div>
+        <div class="grid-item-caption">
+            Archive No. 14
+        </div>
+    </div>
+
+
+<div class="grid-item-container">
+        <div class="exhibit-card">
+            <img src="image15.jpg" alt="Guava Shoot" class="exhibit-image">
+            <div class="exhibit-description">
+                <h3>A sculpted secret</h3>
+                <p>A photo snap of masterclass "geometry of a secret."This close-up of the double jasmine doesn't look like a typical flower center; it looks like a cradle.Unlike the open display of many blossoms, the double jasmine hides its center behind a complex, spiraling barricade of white petals. This intersection captures the "Aperture of Intimacy"—a rare glimpse into the flower's private, internal space.The core looks almost like a small, solid fruit or a pearl resting at the bottom of a silk bowl. It gives the flower a "weight" that most jasmines don't seem to have.</p>
+            </div>
+        </div>
+        <div class="grid-item-caption">
+            Archive No. 15 
+        </div>
+    </div>
+
+
+
+<div class="grid-item-container">
+        <div class="exhibit-card">
+            <img src="image16.jpg" alt="Guava Shoot" class="exhibit-image">
+            <div class="exhibit-description">
+                <h3>The Dual Singularity</h3>
+                <p>A masterpiece of biological integrity that modern medicine often struggles to replicate without compromise.While human development often views intertwined structures through the lens of competition or deficiency, this raw banana proves that nature can sustain "one heart, two bodies" with absolute structural completeness. This intersection captures the fruit at the threshold of ripening — a moment where its "twin" geometry is not a compromise, but a double manifestation of a single intent.</p>
+            </div>
+        </div>
+        <div class="grid-item-caption">
+            Archive No. 16 
+        </div>
+    </div>
+
+
+<div class="grid-item-container">
+        <div class="exhibit-card">
+            <img src="image17.jpg" alt="Guava Shoot" class="exhibit-image">
+            <div class="exhibit-description">
+                <h3>The Deception of Depth - The Liquid Forest</h3>
+                <p>At a glance, it looks like a dense, static floor of green moss or algae. But then, in that "striking moment" of deep seeing, one can realize the water isn't stagnant at all. It is teeming with life. A moment, liquid environment can look like a solid floor. It revealed to be a vibrant, three-dimensional metropolis. This intersection captures the precise second the eye stops seeing "debris" and starts seeing "movement". An ordinary garden tank where life thrives within the very green "ruins" at its bottom.</p>
+            </div>
+        </div>
+        <div class="grid-item-caption">
+            Archive No. 17 
+        </div>
+    </div>
+
+
+
+<div class="grid-item-container">
+        <div class="exhibit-card">
+            <img src="image18.jpg" alt="Guava Shoot" class="exhibit-image">
+            <div class="exhibit-description">
+                <h3>The Silent Orbit</h3>
+                <p>A single second of recognition by a human eye saved a geometry that took thousands of years to form. An intersection of geologic eons and a singular human decision. This stone, shaped into a near-perfect globe by centuries of silent pressure and friction beneath the earth, represents a "hidden geometry" that was never intended for the light.This stone wasn't just "found," discovered by choice to see it as art rather than debris."We unearthed a silent geometry: a stone sphere, shaped by time, preserved by choice."</p>
+            </div>
+        </div>
+        <div class="grid-item-caption">
+            Archive No. 18
+        </div>
+    </div>
+
+
+<div class="grid-item-container">
+        <div class="exhibit-card">
+            <img src="image19.jpg" alt="Guava Shoot" class="exhibit-image">
+            <div class="exhibit-description">
+                <h3>The Architecture of a Heart</h3>
+                <p>Caught it in a timing, three-lobed "triptych" shape that makes the flower feel less like a random growth and more like a carefully folded piece of origami.This perspective captures the blossom at its most vulnerable threshold, where the outer petals have arranged themselves into a precise, three-pointed geometry to frame the central "heart." This intersection is a matter of hours; it represents the brief window before the internal layers unfurl to fill the void.</p>
+            </div>
+        </div>
+        <div class="grid-item-caption">
+            Archive No. 19 
+        </div>
+    </div>
+
+
+<div class="grid-item-container">
+        <div class="exhibit-card">
+            <img src="image20.jpg" alt="Guava Shoot" class="exhibit-image">
+            <div class="exhibit-description">
+                <h3>The Forest of Persistence</h3>
+                <p>It reminds the viewer that while a single second of water flow seems insignificant, the accumulation of those seconds over time builds a "forest" where there was once only bare stone.Continuously shaped by the rhythm of moving water, these tiny layers of moss have organized themselves into a dense, structural architecture."The Value of a Second" multiplied by time; a testament to how the quietest, smallest lives can colonize the hardest surfaces through pure, unhurried persistence.</p>
+            </div>
+        </div>
+        <div class="grid-item-caption">
+            Archive No. 20 
+        </div>
+    </div>
+
+
+<div class="grid-item-container">
+        <div class="exhibit-card">
+            <img src="image21.jpg" alt="Guava Shoot" class="exhibit-image">
+            <div class="exhibit-description">
+                <h3>The Subterranean Will-Physical force of survival</h3>
+                <p>This photo requests the viewer to look down instead of up.This intersection captures the precise moment where the hidden becomes visible — where the roots have literally "pierced" the surface to reveal their capacity for survival. A portrait of moment captured across decades; the static evidence of a slow-motion struggle that is usually private, now turned into public geometry.</p>
+            </div>
+        </div>
+        <div class="grid-item-caption">
+            Archive No. 21 
+        </div>
+    </div>
+
+
+<div class="grid-item-container">
+        <div class="exhibit-card">
+            <img src="image22.jpg" alt="Guava Shoot" class="exhibit-image">
+            <div class="exhibit-description">
+                <h3>The Equinox of Wither - The Beauty of "Half-Done"</h3>
+                <p>The very moment a life cycle crosses its own finish line — the exact second where the "green" of growth is being overtaken by the "parchment" of completion.The precise intersection of its existence; half-vibrant with the green of living tissue, half-transformed into the brittle, brown architecture of a seed-carrier. This image represents the point of no return—the brief window where the plant is both its past and its future at once.</p>
+            </div>
+        </div>
+        <div class="grid-item-caption">
+            Archive No. 22
+        </div>
+    </div>
+
+
+<div class="grid-item-container">
+        <div class="exhibit-card">
+            <img src="image23.jpg" alt="Guava Shoot" class="exhibit-image">
+            <div class="exhibit-description">
+                <h3>The Aperture of Ascent</h3>
+                <p>A plant that isn't just growing, but appears to be actively "reaching" for the sun with a structural precision that looks manufactured, yet is entirely organic. This tender guava shoot has unfurled into a startling, fork-like geometry, perfectly aligned to "catch" the first rays of the sun. This intersection captures a developmental stage that lasts only a few hours — the brief window where the leaves are rigid enough to hold this fork-spoon shape but tender enough to be translucent in the morning light.</p>
+            </div>
+        </div>
+        <div class="grid-item-caption">
+            Archive No. 23 
+        </div>
+    </div>
+
+
+
+<div class="grid-item-container">
+        <div class="exhibit-card">
+            <img src="image24.jpg" alt="Guava Shoot" class="exhibit-image">
+            <div class="exhibit-description">
+                <h3>The Weightless Inflorescence</h3>
+                <p>A structural survival after the departure of chlorophyll.These striking globes of feathers are not a sign of the end, but a masterclass in the "Geometry of Dispersal."A moment captured to show how the plant becomes more complex once the "useful" parts are gone. It challenges the viewer to perceive the afterlife of function as a form of art.A unrepeatable moment to see the message they carry, rather than just the weed they come from.</p>
+            </div>
+        </div>
+        <div class="grid-item-caption">
+            Archive No. 24 
+        </div>
+    </div>
+
+
+
+<div class="grid-item-container">
+        <div class="exhibit-card">
+            <img src="image25.jpg" alt="Guava Shoot" class="exhibit-image">
+            <div class="exhibit-description">
+                <h3>A masterpiece in developmental plasticity-The Autonomous Anchor</h3>
+                <p>Seeing the petiole (leaf-stem) anchored squarely in the middle of the leaf blade—like a tent pole or an umbrella handle—is a genuine architectural marvel.The ultimate evidence of Biological Sovereignty—a Leaf deciding to redefine its own anchor.This "bent legend" reveals a rare architectural pivot: a stem that meets the leaf at its geometric heart rather than its base. While most foliage adheres to a predictable blueprint, this leaf has constructed a radial universe of its own.</p>
+            </div>
+        </div>
+        <div class="grid-item-caption">
+            Archive No. 25 
+        </div>
+    </div>
+
+
+<div class="grid-item-container">
+        <div class="exhibit-card">
+            <img src="image26.jpg" alt="Guava Shoot" class="exhibit-image">
+            <div class="exhibit-description">
+                <h3>A Water Melon's Heart</h3>
+                <p>A mere coincidence of cut. A unexpected moment when opened a cut, revealed this water melon's heart.</p>
+            </div>
+        </div>
+        <div class="grid-item-caption">
+            Archive No. 26 
+        </div>
+    </div>
+
+
+
+<div class="grid-item-container">
+        <div class="exhibit-card">
+            <img src="image27.jpg" alt="Guava Shoot" class="exhibit-image">
+            <div class="exhibit-description">
+                <h3>The Inherited Dictionary</h3>
+                <p>A precise second where an inherent trait becomes a physical action — the mother hen "piercing" the earth to reveal the world to her offspring. A portrait of a "living dictionary," where knowledge is not read but witnessed. The synchrony here is found in the alignment of the mother’s protective digging and the chick's immediate, instinctive imitation — proving that nature’s most complex systems of survival are built without a single word of formal education.</p>
+            </div>
+        </div>
+        <div class="grid-item-caption">
+            Archive No. 27 
+        </div>
+    </div>
+
+
+
+
+
+
+
+    
+        </main>
+
+   <section class="bottom-frame-container">
+        <div class="bottom-frame-caption">
+            "We didn't curate the plant, we curated the second it decided to exist in that specific light.
+             Nature is a repeatable commander, already in action for millions of years. Nature doesn't make mistakes; it makes prototypes for new ways of being."
+
+	</div>
+    </section>
+
+    <footer>
+        <div>All moments captured in situ</div>
+        <div>"A Space for Temporary Forms; Unrepeatable"</div>
+        <div>Time is the only curator</div>
+    </footer>
+
+
+</body>
+</html>

@@ -125,3 +125,10 @@ This line serves as the philosophical backbone of the entire body of work.
 
 A visual archivist of the fleeting second where nature, geometry, and meaning briefly become one.
 
+Interested to Share your thoughts/suggestions, please...?
+
+✉️ Feedback and reflections are welcome as we continue to fine-tune.
+
+Curator: [Siva/gskg02@gmail.com]
+
+**"A RECYCLABLE, REUSABLE, REDUCABLE and a SUSTAINABLE digital writing with humane thinking."**

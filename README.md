@@ -5,6 +5,7 @@
 ---
 
 ## Concept Statement
+** All Photographs taken on a budget smartphone only, no expensive cameras used.**
 **The Synchrony Wing** is a curated body of nature-based photographic works centered on a single philosophy:
 
 > **The subject is not the object, but the exact second in which it becomes meaningful.**
